@@ -2,17 +2,13 @@ package Source;
 
 public class Faktura {
 
-    private String nazwaFirmy;
-    private String nrFaktury;
-    private String adres;
-    private int kodPocztowy;
-    private String adresDostawy;
-    private int kodPocztowyDostawa;
+    protected String nrFaktury;           //nazwa firmy, imie/nazwisko beda u dzieci, 
+    protected String adres;               //te sa wspolne dla wszystkich klas dziedziczacych
+    protected int kodPocztowy;
+    protected String adresDostawy;
+    protected int kodPocztowyDostawa;
 
     // <editor-fold defaultstate="collapsed" desc="Gettery">
-    public String getNazwaFirmy() {
-        return nazwaFirmy;
-    }
 
     public String getnrFaktury() {
         return nrFaktury;
