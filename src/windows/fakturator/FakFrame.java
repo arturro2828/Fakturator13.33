@@ -1,4 +1,4 @@
-package windows;
+package windows.fakturator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
