@@ -1,3 +1,3 @@
-Fakturator13.33
+Fakturator
 ===============
 Nothing special, bs java project
