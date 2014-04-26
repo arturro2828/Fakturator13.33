@@ -1,4 +1,4 @@
-package sourceCode.fakturator;
+package sourceCode;
 
 public class Firma extends Faktura {
     

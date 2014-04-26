@@ -1,4 +1,4 @@
-package sourceCode.fakturator;
+package sourceCode;
 
 public class OsPrywatna extends Faktura {
 

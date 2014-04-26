@@ -1,8 +1,8 @@
-package sourceCode.fakturator;
+package sourceCode;
 
 public class Faktura {
 
-    protected String nrFaktury;           //nazwa firmy, imie/nazwisko beda u dzieci, 
+    protected String nrFaktury = "F/201402/00123";           //nazwa firmy, imie/nazwisko beda u dzieci, 
     protected String adres;               //te sa wspolne dla wszystkich klas dziedziczacych
     protected int kodPocztowy;
     protected String adresDostawy;
@@ -32,6 +32,7 @@ public class Faktura {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Settery">
+    
     // </editor-fold>
 
 }
