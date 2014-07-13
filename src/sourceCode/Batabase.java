@@ -1,7 +1,9 @@
 
 
 package sourceCode;
+import sourceCode.Invoice;
 import java.sql.*;
+
 public class Batabase {
     
   public void connect(){
@@ -46,7 +48,7 @@ public class Batabase {
       
       
     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoice VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-  //  preparedStatement.setString(1, Faktura.getName());
+    //preparedStatement.setString(1, Invoice.);
     preparedStatement.execute();
     ResultSet result = statement.executeQuery("SELECT * FROM invoice");
     while (result.next()) {
