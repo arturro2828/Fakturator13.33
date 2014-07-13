@@ -16,8 +16,8 @@ public class Batabase {
       
       statement = connection.createStatement();
       String customer = "CREATE TABLE IF NOT EXISTS CUSTOMER (ID INT PRIMARY KEY NOT NULL, CUSTOMER TEXT NOT NULL,  ADDRESS TEXT NOT NULL,  TAX_ID TEXT NOT NULL)";
-      String product = "CREATE TABLE IF NOT EXISTS PRODUCT (ID INT PRIMARY KEY NOT NULL, PRODUCT TEXT NOT NULL, QUANTITY INT NOT NULL, PRICE INT NOT NULL)";
-      String invoice = "CREATE TABLE IF NOT EXISTS INVOICE (ID INT PRIMARY KEY NOT NULL, KLIENT_ID INT CONSTRAINT klient_fk REFERENCES klient (id),PRODUKT_ID INT CONSTRAINT produkt_fk REFERENCES produkt (id),"+
+      String product = "CREATE TABLE IF NOT EXISTS PRODUCT (ID INT PRIMARY KEY NOT NULL, INVOICE_ID INT CONSTRAINT invoice_fk REFERENCES invoice (id),PRODUCT TEXT NOT NULL, QUANTITY INT NOT NULL, PRICE INT NOT NULL)";
+      String invoice = "CREATE TABLE IF NOT EXISTS INVOICE (ID INT PRIMARY KEY NOT NULL, KLIENT_ID INT CONSTRAINT klient_fk REFERENCES klient (id),"+
       "INVOICE_NR TEXT NOT NULL,"+
       "INVOICE_ADDRESS TEXT NOT NULL,"+
       "INVOICE_DATE DATETIME NOT NULL,"+
@@ -43,6 +43,16 @@ public class Batabase {
       statement.execute(customer);
       statement.execute(product);
       statement.execute(invoice);
+      
+      
+    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoice VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+  //  preparedStatement.setString(1, Faktura.getName());
+    preparedStatement.execute();
+    ResultSet result = statement.executeQuery("SELECT * FROM invoice");
+    while (result.next()) {
+    result.getInt("id");
+    result.getString("name");
+   }
      
     } catch ( Exception exception ) {
       System.err.println( exception.getClass().getName() + ": " + exception.getMessage() );
