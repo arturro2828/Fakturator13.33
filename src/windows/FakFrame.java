@@ -1,5 +1,7 @@
 package windows;
 
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,15 +35,15 @@ public class FakFrame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        dataPlatnosci = new javax.swing.JTextArea();
+        dueDateText = new javax.swing.JTextArea();
         jComboBox1 = new javax.swing.JComboBox();
-        jLabel2 = new javax.swing.JLabel();
+        invoiceDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jScrollPane4 = new javax.swing.JScrollPane();
-        nrFaktury = new javax.swing.JTextArea();
+        javax.swing.JTextArea invoiceNoText = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         daneFirmy = new javax.swing.JTextArea();
@@ -65,9 +67,8 @@ public class FakFrame extends javax.swing.JFrame {
         jTextArea9 = new javax.swing.JTextArea();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTextArea10 = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        poleDaty = new javax.swing.JTextArea();
         dataText = new javax.swing.JLabel();
+        showInvoiceDate = new javax.swing.JTextField();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -78,49 +79,49 @@ public class FakFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("nr faktury:");
+        jLabel1.setText("Invoice no.");
 
-        dataPlatnosci.setColumns(20);
-        dataPlatnosci.setRows(5);
-        jScrollPane3.setViewportView(dataPlatnosci);
+        dueDateText.setColumns(20);
+        dueDateText.setRows(5);
+        jScrollPane3.setViewportView(dueDateText);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DAP", "FCA" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DAP", "FCA", "FOB" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Data faktury");
+        invoiceDate.setText("Invoice date");
 
-        jLabel3.setText("Termin płatności");
+        jLabel3.setText("Terms of payment");
 
-        jLabel4.setText("Data płatności");
+        jLabel4.setText("Due date");
 
-        jLabel5.setText("Baza dostawy");
+        jLabel5.setText("Terms of delivery");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 dzień", "5 dni", "10 dni", "30dni" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 day", "5 days", "10 days", "30 days" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
-        nrFaktury.setColumns(20);
-        nrFaktury.setRows(5);
-        jScrollPane4.setViewportView(nrFaktury);
+        invoiceNoText.setColumns(20);
+        invoiceNoText.setRows(5);
+        jScrollPane4.setViewportView(invoiceNoText);
 
-        jLabel6.setText("Dane firmy");
+        jLabel6.setText("Supplier");
 
         daneFirmy.setColumns(20);
         daneFirmy.setRows(5);
         jScrollPane5.setViewportView(daneFirmy);
 
-        jLabel7.setText("Nazwa knk");
+        jLabel7.setText("Customer no");
 
-        jLabel8.setText("Adres faktury");
+        jLabel8.setText("Issued to");
 
-        jLabel9.setText("Adres dostawy");
+        jLabel9.setText("Ship to");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -140,7 +141,7 @@ public class FakFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "L.P", "Produkt", "Cena jedn.", "waluta", "ilość", "Jednostka", "VAT", "Wartość"
+                "No.", "Product", "Price per unit", "Currency", "Quantity", "Unit", "VAT", "Gross"
             }
         ) {
             Class[] types = new Class [] {
@@ -156,13 +157,13 @@ public class FakFrame extends javax.swing.JFrame {
             listaProduktow.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
 
-        jLabel11.setText("wartość");
+        jLabel11.setText("Gross");
 
-        jLabel12.setText("Podatek");
+        jLabel12.setText("Tax");
 
-        jLabel13.setText("Suma");
+        jLabel13.setText("Total");
 
-        jLabel14.setText("Podpis wystawc:");
+        jLabel14.setText("Signature");
 
         jTextArea8.setColumns(20);
         jTextArea8.setRows(5);
@@ -175,10 +176,6 @@ public class FakFrame extends javax.swing.JFrame {
         jTextArea10.setColumns(20);
         jTextArea10.setRows(5);
         jScrollPane11.setViewportView(jTextArea10);
-
-        poleDaty.setColumns(20);
-        poleDaty.setRows(5);
-        jScrollPane1.setViewportView(poleDaty);
 
         dataText.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -193,29 +190,34 @@ public class FakFrame extends javax.swing.JFrame {
             }
         });
 
+        showInvoiceDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showInvoiceDateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel6)
-                .addGap(0, 789, Short.MAX_VALUE))
+                .addGap(0, 803, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel2)
-                        .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(dataText, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(invoiceDate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataText, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(showInvoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +267,7 @@ public class FakFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 710, Short.MAX_VALUE))
+                                .addGap(0, 700, Short.MAX_VALUE))
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
         );
@@ -278,15 +280,19 @@ public class FakFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(dataText, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(invoiceDate)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(showInvoiceDate))))
                         .addGap(81, 81, 81))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,6 +360,11 @@ public class FakFrame extends javax.swing.JFrame {
         System.out.println("date");
     }//GEN-LAST:event_dataTextInputMethodTextChanged
 
+    private void showInvoiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showInvoiceDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showInvoiceDateActionPerformed
+   
+    
     /**
      * @param args the command line arguments
      */
@@ -391,8 +402,9 @@ public class FakFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea daneFirmy;
-    private javax.swing.JTextArea dataPlatnosci;
     public javax.swing.JLabel dataText;
+    private javax.swing.JTextArea dueDateText;
+    private javax.swing.JLabel invoiceDate;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -402,7 +414,6 @@ public class FakFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -410,7 +421,6 @@ public class FakFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
@@ -428,7 +438,6 @@ public class FakFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea8;
     private javax.swing.JTextArea jTextArea9;
     private javax.swing.JTable listaProduktow;
-    private javax.swing.JTextArea nrFaktury;
-    private javax.swing.JTextArea poleDaty;
+    public javax.swing.JTextField showInvoiceDate;
     // End of variables declaration//GEN-END:variables
 }
