@@ -1,17 +1,25 @@
 
 
 package sourceCode;
+import model.Invoice;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import windows.FakFrame;
+import windows.SelectItem;
+import java.util.List;
+import model.Customer;
+import model.Product;
+import model.Invoicing;
 
 public class Database  {
     
     Connection connection = null;
     Statement statement = null;
-  
-    FakFrame frame = new FakFrame();
-    
     
     
     public void connect()
@@ -23,120 +31,18 @@ public class Database  {
       connection = DriverManager.getConnection("jdbc:sqlite:test.db");
       connection.setAutoCommit(false);
       System.out.println("Opened database successfully");
-      
       statement = connection.createStatement();
-      String customerdb = "CREATE TABLE IF NOT EXISTS CUSTOMER (ID INT PRIMARY KEY NOT NULL, CUSTOMER TEXT NOT NULL,  ADDRESS TEXT NOT NULL, TAX INT NOT NULL)";
-     // String productdb = "CREATE TABLE IF NOT EXISTS PRODUCT (ID INT PRIMARY KEY NOT NULL, INVOICE_ID INT CONSTRAINT invoice_fk REFERENCES invoice (id),PRODUCT TEXT NOT NULL, QUANTITY INT NOT NULL, PRICE INT NOT NULL)";
-      String invoicedb ="CREATE TABLE IF NOT EXISTS INVOICE (ID INT PRIMARY KEY NOT NULL, CUSTOMERID INT CONSTRAINT customer_fk REFERENCES customer (id),"+
-      "INVOICENO TEXT,"+
-      "INVOICEADDRESS TEXT,"+
-      "INVOICEDATE DATETIME,"+
-      "DELIVERYADDRESS TEXT,"+
-      "CUSTOMERNO TEXT,"+
-      "SUPPLIER TEXT,"+
-      "TERMSOFPAYMENT INT,"+
-      "DUEDATE DATETIME,"+
-      "TERMSOFDELIVERY TEXT,"+
-      "TAX DECIMAL,"+
-      "VALUE DECIMAL,"+
-      "TOTAL DECIMAL,"+
-      "SIGNATURE TEXT,"+
-      "GROSS DECIMAL,"+
-      "NO INT,"+
-      "PRODUCT TEXT,"+
-      "PRICEPERUNIT DECIMAL,"+
-      "CURRENCY DECIMAL,"+
-      "QUANTITY INT,"+
-      "UNIT INT,"+
-      "VAT INT)";
+      //nie dzialaja id_customer INTEGER CONSTRAINT customer_fk REFERENCES customer (id)
+           
+      String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT,  customerName varchar(255), companyAddress varchar(255), deliveryAddress varchar(255))";
+      String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName varchar(255), price FLOAT)";
+      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, id_customer int, id_product int)";
      
-    statement.execute(customerdb);
-    // statement.execute(productdb);
-    statement.execute(invoicedb);
-     
-    PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO CUSTOMER VALUES (?,?,?,?);"); 
-     preparedStatement1.setInt(1,1);
-     preparedStatement1.setString(2,"moland");
-     preparedStatement1.setString(3,"zagorska");
-     preparedStatement1.setString(4,"23%");
-     preparedStatement1.execute(); 
-      
-    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO INVOICE VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-    preparedStatement.setInt(1,12323);
-    preparedStatement.setInt(2,232323);
-    preparedStatement.setString(3,"4r4r4r4r");
-    preparedStatement.setString(4,"rrrrr");
-    preparedStatement.setString(5,"r4r4r4r");
-    preparedStatement.setString(6,"4rt5t5t");
-    preparedStatement.setString(7,"4r4r44rg");
-    preparedStatement.setString(8,"A&P International");
-    preparedStatement.setInt(9,55); 
-    preparedStatement.setString(10,"545");
-    preparedStatement.setString(11,"454r4f");
-    preparedStatement.setFloat(12,4);
-    preparedStatement.setFloat(13,5);
-    preparedStatement.setFloat(14,6);
-    preparedStatement.setString(15,"siggtgtnature");
-    preparedStatement.setFloat(16,7);
-    preparedStatement.setInt(17,8);
-    preparedStatement.setString(18,"gtg");
-    preparedStatement.setFloat(19,9);
-    preparedStatement.setFloat(20,10);
-    preparedStatement.setInt(21,11);
-    preparedStatement.setInt(22,12);
-    preparedStatement.setInt(23,13);
-
-    preparedStatement.execute();
-  
-    ResultSet result = statement.executeQuery("SELECT * FROM INVOICE");
-    while (result.next()) {
-        
-    int ID = result.getInt("ID");
-    result.getInt ("customerId");
-    result.getString ("invoiceNo"); 
-    result.getString ("InvoiceAddress");             
-    result.getString ("invoiceDate");
-    result.getString ("deliveryAddress");
-    result.getString ("customerNo");
-    String supplier = result.getString ("supplier");
-    result.getInt ("termsOfPayment");
-    result.getString ("dueDate");
-    result.getString ("termsOfDelivery"); 
-    result.getFloat ("tax");
-    result.getFloat ("value");
-    result.getFloat ("total");
-    result.getString ("signature");
-    result.getFloat ("gross");
-    result.getInt ("no");
-    result.getString ("product");
-    result.getFloat ("pricePerUnit");
-    result.getFloat ("currency");
-    result.getInt ("quantity");
-    result.getInt ("unit");
-    result.getInt ("vat");
+      statement.execute(createCustomer );
+      statement.execute(createProduct);
+      statement.execute(createInvoicing);
     
-  frame.supplierText.setValue(supplier);
-   }
-    String customerdb1 = "INSERT INTO CUSTOMER values (111,'art','zagorska',23)";
-      statement.executeUpdate(customerdb1);
- 
-      Date date = new Date();
-      
-      ResultSet rs = statement.executeQuery( "SELECT * FROM CUSTOMER;" );
-      int id = rs.getInt("id");
-      String name = rs.getString("customer");
-      int address = rs.getInt("address");
-      int tax = rs.getInt("tax");
-      
-
-        
-    frame.invoiceDateText.setValue(date);
-    frame.setVisible(true); 
-    
-     
-       
    
-      
      
     } catch ( ClassNotFoundException | SQLException exception ) {
       System.err.println( exception.getClass().getName() + ": " + exception.getMessage() );
@@ -144,9 +50,97 @@ public class Database  {
     }
     
     System.out.println("Table created successfully");
-    
+   
+  
   }
 
-    
+   public boolean insertCustomer(String customerName, String companyAddress, String deliveryAddress) {
+        try {
+    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO customer VALUES (NULL, ?,?,?);"); 
+    preparedStatement.setString(1,customerName);
+    preparedStatement.setString(2,companyAddress);
+    preparedStatement.setString(3,deliveryAddress);
+    preparedStatement.execute();             
+        } catch (SQLException e) {
+            System.err.println("insertCustomer ERROR");
+            return false;
+        }
+        return true;
+    } 
+   
+   public boolean insertProduct(String productName, float price) {
+        try {
+    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO product VALUES (NULL, ?,?);"); 
+    preparedStatement.setString(1,productName);
+    preparedStatement.setFloat(2,price);
+    preparedStatement.execute();             
+        } catch (SQLException e) {
+            System.err.println("insertProduct ERROR");
+            return false;
+        }
+        return true;
+    } 
+   public boolean insertInvoicing(int idCustomer, int idProduct) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoicing VALUES (NULL, ?,?);"); 
+            preparedStatement.setInt(1, idCustomer);
+            preparedStatement.setInt(2, idProduct);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.err.println("Invoicing ERROR");
+            return false;
+        }
+        return true;
+    }
+        
+      
+   public List<Customer> selectCustomer() {
+        List<Customer> customer = new LinkedList<Customer>();
+        try {
+            ResultSet rs = statement.executeQuery( "SELECT * FROM customer" );
+            int ID;
+            String customerName,companyAddress,deliveryAddress;
+            while(rs.next()) {
+                ID = rs.getInt("id_customer");
+                customerName = rs.getString("customerName");
+                companyAddress = rs.getString("companyAddress");
+                deliveryAddress = rs.getString("deliveryAddress");  
+                customer.add(new Customer(ID, customerName,companyAddress, deliveryAddress));  
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return customer;
+        
+    }
+   
+   public List<Product> selectProduct() {
+        List<Product> product = new LinkedList<Product>();
+        try {
+            ResultSet rs = statement.executeQuery("SELECT * FROM product");
+            int ID;
+            String productName;    
+            float price;  
+            while(rs.next()) {
+                ID = rs.getInt("id_product");
+                productName = rs.getString("productName");
+                price = rs.getFloat("price");
+                product.add(new Product(ID, productName, price));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return product;
+    }
+ 
+   public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            System.err.println("Connection ERROR");
+            e.printStackTrace();
+        }}
 }
 
