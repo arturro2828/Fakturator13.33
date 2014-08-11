@@ -1,15 +1,24 @@
 package sourceCode;
 
+import javax.swing.JOptionPane;
 
 
-public class WpiszKlienta implements Interfejs {
+
+//public class WpiszKlienta implements Interfejs {
     
-    Faktura nowaFaktura = new Faktura();
+    //Invoice nowaFaktura = new Invoice();
     
-    @Override
-    public String zapiszWPlik() {
+   // @Override
+   // public String zapiszWPlik() {
         
-        return (nowaFaktura.getnrFaktury());
-    }
+    //    return (nowaFaktura.getnrFaktury());
+  ////  }
 
-}
+//}
+//String name;
+  //  name = JOptionPane.showInputDialog("Name:");
+        
+  //  String address;
+  //  address = JOptionPane.showInputDialog("Address:");
+        
+  //  customerName companyAddress deliveryAddress ID
