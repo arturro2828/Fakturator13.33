@@ -135,8 +135,41 @@ public class Database  {
         return product;
     }
    
-  // public void getCustomerById(select * where id = id){
-   //}
+   public Customer getCustomerById(int ID) throws SQLException{  
+           
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customer WHERE ID = ?" );
+       preparedStatement.setInt(1,ID);
+       preparedStatement.executeQuery();
+       ResultSet rs = preparedStatement.executeQuery();
+       
+        Customer customer = new Customer();
+         while(rs.next()) {
+            customer.setID(rs.getInt(ID));
+            customer.setCustomerName(rs.getString("customerName"));
+            customer.setCompanyAddress(rs.getString("companyAddress"));
+            customer.setDeliveryAddress(rs.getString("deliveryAddress"));
+            
+         }
+        return customer;
+   } 
+   
+ public Product getProductById(int ID) throws SQLException{  
+           
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE ID = ?" );
+       preparedStatement.setInt(1,ID);
+       preparedStatement.executeQuery();
+       ResultSet rs = preparedStatement.executeQuery();
+       
+        Product product = new Product();
+         while(rs.next()) {
+            product.setID(rs.getInt(ID));
+            product.setProductName(rs.getString("productName"));
+            product.setPrice(rs.getFloat("price"));
+           
+            
+         }
+        return product;
+   } 
  
    public void closeConnection() {
         try {
@@ -146,20 +179,7 @@ public class Database  {
             e.printStackTrace();
         }}
         
-        public Customer getCustomerById(int ID) throws SQLException{  
-           
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customer WHERE ID = ?" );
-        preparedStatement.setInt(1,ID);
-       
-        ResultSet rs = preparedStatement.execute();
-        Customer customer = new Customer();
-            customer.setID(rs.getInt(ID));
-            customer.setCompanyAddress(rs.getString("customerName"));
-            customer.setCompanyAddress(rs.getString("companyAddress"));
-            customer.setCompanyAddress(rs.getString("deliveryAddress"));
-          
-        return customer;
-   } 
+        
 
    }   
 
