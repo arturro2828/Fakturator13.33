@@ -134,6 +134,9 @@ public class Database  {
         }
         return product;
     }
+   
+  // public void getCustomerById(select * where id = id){
+   //}
  
    public void closeConnection() {
         try {
@@ -142,5 +145,23 @@ public class Database  {
             System.err.println("Connection ERROR");
             e.printStackTrace();
         }}
-}
+        
+        public Customer getCustomerById(int ID) throws SQLException{  
+           
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customer WHERE ID = ?" );
+        preparedStatement.setInt(1,ID);
+       
+        ResultSet rs = preparedStatement.execute();
+        Customer customer = new Customer();
+            customer.setID(rs.getInt(ID));
+            customer.setCompanyAddress(rs.getString("customerName"));
+            customer.setCompanyAddress(rs.getString("companyAddress"));
+            customer.setCompanyAddress(rs.getString("deliveryAddress"));
+          
+        return customer;
+   } 
 
+   }   
+
+
+ 

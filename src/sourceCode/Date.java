@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import model.Customer;
 
 public class Date{
-    FakFrame frame = new FakFrame();
- 
+    FakFrame frame = Main.getWindow();
+    
     public void Date(){
          
   

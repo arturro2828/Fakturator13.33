@@ -9,7 +9,7 @@ public class Customer {
   private  String deliveryAddress;  //shipToText 
 
     
-  
+ 
   public int getID() {
         return ID;
     } 

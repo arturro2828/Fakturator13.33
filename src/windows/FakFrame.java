@@ -44,7 +44,7 @@ public class FakFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        CustomerNoText = new javax.swing.JComboBox();
         jScrollPane8 = new javax.swing.JScrollPane();
         listaProduktow = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
@@ -102,16 +102,15 @@ public class FakFrame extends javax.swing.JFrame {
 
         jLabel9.setText("Ship to");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose the customer", "solowow", "krauze", "czarnecki", "solorz" }));
-        jComboBox3.setToolTipText("");
-        jComboBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+        CustomerNoText.setToolTipText("");
+        CustomerNoText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox3MouseClicked(evt);
+                CustomerNoTextMouseClicked(evt);
             }
         });
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        CustomerNoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                CustomerNoTextActionPerformed(evt);
             }
         });
 
@@ -207,7 +206,7 @@ public class FakFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(22, 22, 22)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CustomerNoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -274,7 +273,7 @@ public class FakFrame extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CustomerNoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,50 +361,20 @@ public class FakFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_issueToTextActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void CustomerNoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerNoTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_CustomerNoTextActionPerformed
 
-    private void jComboBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox3MouseClicked
+    private void CustomerNoTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerNoTextMouseClicked
      
-    }//GEN-LAST:event_jComboBox3MouseClicked
+    }//GEN-LAST:event_CustomerNoTextMouseClicked
    
     
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FakFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FakFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FakFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FakFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FakFrame().setVisible(true);
-                
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox CustomerNoText;
     public javax.swing.JFormattedTextField DueDateText;
     public javax.swing.JComboBox TermsOfPaymentText;
     public javax.swing.JLabel dataText;
@@ -415,7 +384,6 @@ public class FakFrame extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField invoiceNoText;
     public javax.swing.JFormattedTextField issueToText;
     public javax.swing.JComboBox jComboBox1;
-    public javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

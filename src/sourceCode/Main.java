@@ -1,23 +1,32 @@
 package sourceCode;
 
-
-
+import java.awt.event.ActionListener;
 import model.Customer;
 import model.Product;
 import model.Invoicing; 
 import java.util.List;
 import windows.FakFrame;
+import windows.SelectItem;
 
 
 public class Main {
 
-    
+    static private  FakFrame window =null;
+    static public FakFrame getWindow() {
+    if (Main.window == null) {
+      Main.window = new FakFrame();
+     }
+
+     return Main.window;
+    }
+   
+   
     public static void main(String[] args)  {
         
      
-   //Customer customer = new Customer();
-     FakFrame frame = new FakFrame();
+  
      
+     FakFrame frame = Main.getWindow();
      Customer  customer1 = new Customer ();
      Product product1 = new Product();
      Invoicing invoicing = new Invoicing();
@@ -28,29 +37,57 @@ public class Main {
      date.Date();
      database.insertCustomer("Krauze", "Warszawa", "Warszawa");
      database.insertCustomer("Sołowow","Kielce", "Kopenhaga");
-     database.insertProduct("Dąb", 12);
-     database.insertProduct("Brzoza", 12.8f);
+     database.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
+     database.insertCustomer("Czarnecki","Londyn", "Pruszków");
+     database.insertProduct("Dąb", 800);
+     database.insertProduct("Brzoza", 12000.8f);
      
-     List<Customer> customer = database.selectCustomer();
+     List<Customer> customers = database.selectCustomer();
      List<Product> product = database.selectProduct();  
    
+  
+    
     // frame.setVisible(true);
-  frame.issueToText.setValue(customer);
-     frame.shipToText.setValue(customer.get(0));
+  //frame.issueToText.setValue(customers);
+   //  frame.shipToText.setValue(customers.get(0).getCompanyAddress());
     
   // frame.invoiceDateText.setValue(date.day);
   frame.setVisible(true); 
      ///pomocnnicze wyswietlanie
      System.out.println("Customers List: ");
-     for(Customer c: customer)
+     for(Customer c: customers)
      System.out.println(c);
      
      System.out.println("Products List: ");
      for(Product p: product)
      System.out.println(p);
   
-     database.closeConnection();
-        
+     
+     
+         frame.CustomerNoText.removeAllItems();
+         for(Customer c: customers){
+         frame.CustomerNoText.addItem(new SelectItem(c.getID(),c.getCustomerName()));
+     }
+     
+          
+   for (ActionListener listener : frame.CustomerNoText.getActionListeners()) {
+   frame.CustomerNoText.removeActionListener(listener);
+  }
+  frame.CustomerNoText.addActionListener(new java.awt.event.ActionListener() {
+   @Override
+   public void actionPerformed(java.awt.event.ActionEvent evt) {
+   
+   FakFrame frame = Main.getWindow();    
+   Object selectedCustomer = frame.CustomerNoText.getSelectedItem();
+   Integer customerID = ((SelectItem) selectedCustomer).getId();
+   
+    
+    }
+  }); 
+  frame.shipToText.setValue(customer1.getCompanyAddress());
+    frame.setVisible(true); 
     }
     
-}
+  }
+       
+ 
