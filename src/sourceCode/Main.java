@@ -35,6 +35,7 @@ public class Main {
      
      Date date = new Date();
      date.Date();
+     
      database.insertCustomer("Krauze", "Warszawa", "Warszawa");
      database.insertCustomer("Sołowow","Kielce", "Kopenhaga");
      database.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
@@ -52,7 +53,7 @@ public class Main {
   // frame.shipToText.setValue(customers.get(0).getCompanyAddress());
     
  
-  //frame.setVisible(true); 
+  
      ///pomocnnicze wyswietlanie
      System.out.println("Customers List: ");
      for(Customer c: customers)
@@ -83,7 +84,7 @@ public class Main {
     
    Customer  customer = new Customer ();
    frame.issueToText.setValue(customer.getDeliveryAddress());
-   frame.shipToText.setValue(customerID);
+   frame.shipToText.setValue(customer.getDeliveryAddress());
    frame.setVisible(true); 
     
     }
