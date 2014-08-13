@@ -44,7 +44,7 @@ public class Date{
     
        
   Object selectedDate = frame.TermsOfPaymentText.getSelectedItem();
-  Integer daysAdded = ((SelectItem) selectedDate).getId();
+  int daysAdded = ((SelectItem) selectedDate).getId();
   
   GregorianCalendar calendar = new GregorianCalendar();
  //calendar.setTime(date);
@@ -58,8 +58,8 @@ public class Date{
     
    }
   });  
-//  int id; 
-//  frame.invoiceNoText.setValue(year+""+month+""+id );
+ 
+  frame.invoiceNoText.setValue(year+""+month+"" );
   frame.setVisible(true);
     }
     

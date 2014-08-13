@@ -133,19 +133,9 @@ public class FakFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        listaProduktow.setColumnSelectionAllowed(true);
         jScrollPane8.setViewportView(listaProduktow);
-        listaProduktow.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         if (listaProduktow.getColumnModel().getColumnCount() > 0) {
             listaProduktow.getColumnModel().getColumn(0).setPreferredWidth(5);
-            listaProduktow.getColumnModel().getColumn(0).setHeaderValue("No.");
-            listaProduktow.getColumnModel().getColumn(1).setHeaderValue("Product");
-            listaProduktow.getColumnModel().getColumn(2).setHeaderValue("Price per unit");
-            listaProduktow.getColumnModel().getColumn(3).setHeaderValue("Currency");
-            listaProduktow.getColumnModel().getColumn(4).setHeaderValue("Quantity");
-            listaProduktow.getColumnModel().getColumn(5).setHeaderValue("Unit");
-            listaProduktow.getColumnModel().getColumn(6).setHeaderValue("VAT");
-            listaProduktow.getColumnModel().getColumn(7).setHeaderValue("Gross");
         }
 
         jLabel11.setText("Gross");

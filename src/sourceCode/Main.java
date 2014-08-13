@@ -1,10 +1,13 @@
 package sourceCode;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import model.Customer;
 import model.Product;
 import model.Invoicing; 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import windows.FakFrame;
 import windows.SelectItem;
 
@@ -27,7 +30,7 @@ public class Main {
   
      
      FakFrame frame = Main.getWindow();
-     Customer  customer = new Customer ();
+     final Customer  customer = new Customer ();
      Product product = new Product();
      Invoicing invoicing = new Invoicing();
      Database database = new Database();
@@ -78,14 +81,20 @@ public class Main {
    @Override
    public void actionPerformed(java.awt.event.ActionEvent evt) {
    
-   FakFrame frame = Main.getWindow();    
+   FakFrame frame = Main.getWindow();  
+    Database database = new Database();
    Object selectedCustomer = frame.CustomerNoText.getSelectedItem();
-   Integer customerID = ((SelectItem) selectedCustomer).getId();
+   int customerID = ((SelectItem) selectedCustomer).getId();
+  
+       try {
+           Customer customer = database.getCustomerById(customerID);
+       } catch (SQLException ex) {
+           
+       }
     
-   Customer  customer = new Customer ();
-   frame.issueToText.setValue(customer.getDeliveryAddress());
-   frame.shipToText.setValue(customer.getDeliveryAddress());
-   frame.setVisible(true); 
+   frame.issueToText.setValue(customer.getID());
+   frame.shipToText.setValue(customer.getCompanyAddress());
+  // frame.setVisible(true); 
     
     }
   }); 
@@ -94,4 +103,3 @@ public class Main {
     
   }
        
- 
