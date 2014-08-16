@@ -29,7 +29,7 @@ public class Main {
      
      FakFrame frame = Main.getWindow();
     
-     Product product = new Product();
+    
      Invoicing invoicing = new Invoicing();
      Database database = new Database();
      database.connect();  
@@ -89,12 +89,57 @@ public class Main {
            Customer customer = database.getCustomerById(customerID);
            frame.issueToText.setValue(customer.getCustomerName()+" - "+ customer.getCompanyAddress());
            frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());
+           
+            
+         
+         
+         frame.supplierText.setValue("A&P International");
        } catch (SQLException ex) {
            
        }
          
     }
   }); 
+  
+  
+  
+ ///////////////////////////////
+//  Product product = database.getProductById(product.getID());
+           
+  
+  
+  frame.choosingProduct.removeAllItems();
+         for(Product p: products){
+         frame.choosingProduct.addItem(new SelectItem(p.getID(),p.getProductName()));
+     }
+     
+          
+   for (ActionListener listener : frame.choosingProduct.getActionListeners()) {
+   frame.choosingProduct.removeActionListener(listener);
+  }
+  frame.choosingProduct.addActionListener(new java.awt.event.ActionListener() {
+   @Override
+   public void actionPerformed(java.awt.event.ActionEvent evt) {
+   
+   FakFrame frame = Main.getWindow();  
+    Database database = new Database();
+     database.connect();  
+   Object selectedProduct = frame.choosingProduct.getSelectedItem();
+   int productID = ((SelectItem) selectedProduct).getId();
+  
+       try {
+           Product product = database.getProductById(productID);
+           frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
+         
+ 
+       } catch (SQLException ex) {
+           
+       }
+         
+    }
+  }); 
+  
+  /////////////////////////////////
   
     }
     

@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import windows.SelectItem;
 import windows.FakFrame;
 import model.Customer;
+import model.Invoicing;
 
 public class Date{
     FakFrame frame = Main.getWindow();
@@ -51,13 +52,12 @@ public class Date{
     
    }
   });  
-      Customer customer = new Customer(); 
-  frame.invoiceNoText.setValue(year+""+month+""+customer.getID());
+      Invoicing invoicing = new Invoicing(); 
+  frame.invoiceNoText.setValue(year+""+month+""+invoicing.getIdCustomer());
   frame.setVisible(true);
     }
     
 }
  
     
-   //////////////////////////////     rok miesiac 000001 
 
