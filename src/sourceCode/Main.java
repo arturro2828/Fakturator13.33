@@ -6,8 +6,6 @@ import model.Customer;
 import model.Product;
 import model.Invoicing; 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import windows.FakFrame;
 import windows.SelectItem;
 
@@ -30,7 +28,7 @@ public class Main {
   
      
      FakFrame frame = Main.getWindow();
-     final Customer  customer = new Customer ();
+    
      Product product = new Product();
      Invoicing invoicing = new Invoicing();
      Database database = new Database();
@@ -65,7 +63,7 @@ public class Main {
      System.out.println("Products List: ");
      for(Product p: products)
      System.out.println(p);
-  
+ 
      
      
          frame.CustomerNoText.removeAllItems();
@@ -83,19 +81,18 @@ public class Main {
    
    FakFrame frame = Main.getWindow();  
     Database database = new Database();
+     database.connect();  
    Object selectedCustomer = frame.CustomerNoText.getSelectedItem();
    int customerID = ((SelectItem) selectedCustomer).getId();
   
        try {
            Customer customer = database.getCustomerById(customerID);
+           frame.issueToText.setValue(customer.getCustomerName()+" - "+ customer.getCompanyAddress());
+           frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());
        } catch (SQLException ex) {
            
        }
-    
-   frame.issueToText.setValue(customer.getID());
-   frame.shipToText.setValue(customer.getCompanyAddress());
-  // frame.setVisible(true); 
-    
+         
     }
   }); 
   

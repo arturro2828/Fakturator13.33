@@ -2,13 +2,9 @@
 package sourceCode;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import javax.swing.JFrame;
 import java.util.GregorianCalendar;
 import windows.SelectItem;
 import windows.FakFrame;
-import java.text.SimpleDateFormat;
-import java.util.LinkedList;
-import javax.swing.JOptionPane;
 import model.Customer;
 
 public class Date{
@@ -18,8 +14,6 @@ public class Date{
          
   
   GregorianCalendar calendar = new GregorianCalendar();
-  //Date date = new Date();    
- //calendar.setTime(date);
   int month = calendar.get(Calendar.MONTH)+1;
   int day = calendar.get(Calendar.DAY_OF_MONTH);
   int year = calendar.get(Calendar.YEAR);
@@ -47,7 +41,6 @@ public class Date{
   int daysAdded = ((SelectItem) selectedDate).getId();
   
   GregorianCalendar calendar = new GregorianCalendar();
- //calendar.setTime(date);
   int month = calendar.get(Calendar.MONTH)+1;
   int day = calendar.get(Calendar.DAY_OF_MONTH);
   int year = calendar.get(Calendar.YEAR);
@@ -58,8 +51,8 @@ public class Date{
     
    }
   });  
- 
-  frame.invoiceNoText.setValue(year+""+month+"" );
+      Customer customer = new Customer(); 
+  frame.invoiceNoText.setValue(year+""+month+""+customer.getID());
   frame.setVisible(true);
     }
     
