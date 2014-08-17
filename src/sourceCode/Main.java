@@ -12,7 +12,7 @@ import windows.SelectItem;
 
 public class Main {
     
-    static private  FakFrame window =null;
+    static private  FakFrame window = null;
     static public FakFrame getWindow() {
     if (Main.window == null) {
       Main.window = new FakFrame();
@@ -23,16 +23,12 @@ public class Main {
    
    
     public static void main(String[] args)  {
-        
      
-  
-     
-     FakFrame frame = Main.getWindow();
-    
-    
+     FakFrame frame = Main.getWindow(); 
      Invoicing invoicing = new Invoicing();
      Database database = new Database();
      database.connect();  
+    
      
      Date date = new Date();
      date.Date();
@@ -41,19 +37,15 @@ public class Main {
      database.insertCustomer("Sołowow","Kielce", "Kopenhaga");
      database.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
      database.insertCustomer("Czarnecki","Londyn", "Pruszków");
-     database.insertProduct("Dąb", 800);
-     database.insertProduct("Brzoza", 12000.8f);
+     database.insertProduct("Dąb", 65);
+     database.insertProduct("Brzoza", 55);
+     database.insertProduct("Jesion", 63);
+     database.insertProduct("Czereśnia", 70);
+     
      
      List<Customer> customers = database.selectCustomer();
      List<Product> products = database.selectProduct();  
-   
-  
-    
-    
-  //frame.issueToText.setValue(customers);
-  // frame.shipToText.setValue(customers.get(0).getCompanyAddress());
-    
- 
+
   
      ///pomocnnicze wyswietlanie
      System.out.println("Customers List: ");
@@ -65,13 +57,12 @@ public class Main {
      System.out.println(p);
  
      
-     
          frame.CustomerNoText.removeAllItems();
          for(Customer c: customers){
          frame.CustomerNoText.addItem(new SelectItem(c.getID(),c.getCustomerName()));
      }
      
-          
+        
    for (ActionListener listener : frame.CustomerNoText.getActionListeners()) {
    frame.CustomerNoText.removeActionListener(listener);
   }
@@ -88,32 +79,23 @@ public class Main {
        try {
            Customer customer = database.getCustomerById(customerID);
            frame.issueToText.setValue(customer.getCustomerName()+" - "+ customer.getCompanyAddress());
-           frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());
-           
-            
-         
-         
-         frame.supplierText.setValue("A&P International");
+           frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());        
+           frame.supplierText.setValue("A&P International");
        } catch (SQLException ex) {
            
        }
          
     }
   }); 
-  
-  
-  
- ///////////////////////////////
-//  Product product = database.getProductById(product.getID());
-           
-  
+          
+ 
   
   frame.choosingProduct.removeAllItems();
          for(Product p: products){
          frame.choosingProduct.addItem(new SelectItem(p.getID(),p.getProductName()));
      }
      
-          
+         
    for (ActionListener listener : frame.choosingProduct.getActionListeners()) {
    frame.choosingProduct.removeActionListener(listener);
   }
@@ -127,11 +109,10 @@ public class Main {
    Object selectedProduct = frame.choosingProduct.getSelectedItem();
    int productID = ((SelectItem) selectedProduct).getId();
   
-       try {
+     try {
            Product product = database.getProductById(productID);
            frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
-         
- 
+           frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
        } catch (SQLException ex) {
            
        }
@@ -139,7 +120,7 @@ public class Main {
     }
   }); 
   
-  /////////////////////////////////
+ 
   
     }
     

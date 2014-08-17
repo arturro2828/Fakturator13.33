@@ -27,16 +27,16 @@ public class Database  {
       System.out.println("Opened database successfully");
       statement = connection.createStatement();
       //nie dzialaja id_customer INTEGER CONSTRAINT customer_fk REFERENCES customer (id)
-         
+      
       String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName varchar(255), companyAddress varchar(255), deliveryAddress varchar(255))";
       String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName varchar(255), price FLOAT)";
       String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, id_customer int, id_product int)";
-     
+  
       statement.execute(createCustomer );
       statement.execute(createProduct);
       statement.execute(createInvoicing);
     
-   
+    
      
     } catch ( ClassNotFoundException | SQLException exception ) {
       System.err.println( exception.getClass().getName() + ": " + exception.getMessage() );
@@ -149,7 +149,7 @@ public class Database  {
    
  public Product getProductById(int ID) throws SQLException{  
            
-       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE ID = ?" );
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE id_product = ?" );
        preparedStatement.setInt(1,ID);
        preparedStatement.executeQuery();
        ResultSet rs = preparedStatement.executeQuery();
