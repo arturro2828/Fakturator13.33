@@ -26,7 +26,7 @@ public class Main {
 
      FakFrame frame = Main.getWindow();
      Invoicing invoicing = new Invoicing();
-     Database database = new Database();
+     Database database = Database.getDatabase();
      database.connect();
 
 
@@ -64,8 +64,7 @@ public class Main {
    public void actionPerformed(java.awt.event.ActionEvent evt) {
 
    FakFrame frame = Main.getWindow();
-    Database database = new Database();
-     database.connect();
+    Database database = Database.getDatabase();
    Object selectedCustomer = frame.CustomerNoText.getSelectedItem();
    int customerID = ((SelectItem) selectedCustomer).getId();
 
@@ -97,8 +96,7 @@ public class Main {
    public void actionPerformed(java.awt.event.ActionEvent evt) {
 
    FakFrame frame = Main.getWindow();
-    Database database = new Database();
-     database.connect();
+   Database database = Database.getDatabase();
    Object selectedProduct = frame.choosingProduct.getSelectedItem();
    int productID = ((SelectItem) selectedProduct).getId();
 
