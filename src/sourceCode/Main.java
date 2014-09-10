@@ -12,6 +12,7 @@ import windows.SelectItem;
 
 public class Main {
 
+
     static private  FakFrame window = null;
     static public FakFrame getWindow() {
     if (Main.window == null) {
@@ -20,7 +21,6 @@ public class Main {
 
      return Main.window;
     }
-
 
     public static void main(String[] args)  {
 
@@ -32,8 +32,6 @@ public class Main {
 
      Date date = new Date();
      date.Date();
-
-
 
 
      List<Customer> customers = database.selectCustomer();
@@ -102,6 +100,10 @@ public class Main {
 
      try {
            Product product = database.getProductById(productID);
+
+           // jakas petla
+           frame.listaProduktow.getModel().getValueAt(0, 0);
+
            frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
            frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
        } catch (SQLException ex) {
