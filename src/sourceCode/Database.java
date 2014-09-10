@@ -42,14 +42,21 @@ public class Database  {
       statement.execute(createProduct);
       statement.execute(createInvoicing);
 
-      this.insertCustomer("Krauze", "Warszawa", "Warszawa");
-      this.insertCustomer("Sołowow","Kielce", "Kopenhaga");
-      this.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
-      this.insertCustomer("Czarnecki","Londyn", "Pruszków");
-      this.insertProduct("Dąb", 65);
-      this.insertProduct("Brzoza", 55);
-      this.insertProduct("Jesion", 63);
-      this.insertProduct("Czereśnia", 70);
+      List<Customer> customers = this.selectCustomer();
+      if (customers.isEmpty()) {
+       this.insertCustomer("Krauze", "Warszawa", "Warszawa");
+       this.insertCustomer("Sołowow","Kielce", "Kopenhaga");
+       this.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
+       this.insertCustomer("Czarnecki","Londyn", "Pruszków");
+      }
+
+      List<Product> products = this.selectProduct();
+      if (products.isEmpty()) {
+       this.insertProduct("Dąb", 65);
+       this.insertProduct("Brzoza", 55);
+       this.insertProduct("Jesion", 63);
+       this.insertProduct("Czereśnia", 70);
+      }
 
     } catch ( ClassNotFoundException | SQLException exception ) {
       System.err.println( exception.getClass().getName() + ": " + exception.getMessage() );
