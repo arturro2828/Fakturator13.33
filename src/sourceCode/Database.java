@@ -1,5 +1,3 @@
-
-
 package sourceCode;
 
 
@@ -28,15 +26,27 @@ public class Database  {
       statement = connection.createStatement();
       //nie dzialaja id_customer INTEGER CONSTRAINT customer_fk REFERENCES customer (id)
       
-      String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName varchar(255), companyAddress varchar(255), deliveryAddress varchar(255))";
-      String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName varchar(255), price FLOAT)";
-      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, id_customer int, id_product int)";
+      String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName varchar(255), companyAddress varchar(255), deliveryAddress varchar(255));";
+      String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName varchar(255), price FLOAT);";
+      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, id_customer int, id_product int);";
   
-      statement.execute(createCustomer );
+      statement.execute(createCustomer);
+      
+    
+    
       statement.execute(createProduct);
+      
+    
+     
       statement.execute(createInvoicing);
-    
-    
+     this.insertCustomer("Krauze", "Warszawa", "Warszawa");
+     this.insertCustomer("Sołowow","Kielce", "Kopenhaga");
+     this.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
+     this.insertCustomer("Czarnecki","Londyn", "Pruszków");
+     this.insertProduct("Dąb", 65);
+     this.insertProduct("Brzoza", 55);
+     this.insertProduct("Jesion", 63);
+     this.insertProduct("Czereśnia", 70);
      
     } catch ( ClassNotFoundException | SQLException exception ) {
       System.err.println( exception.getClass().getName() + ": " + exception.getMessage() );
@@ -91,7 +101,7 @@ public class Database  {
    public List<Customer> selectCustomer() {
         List<Customer> customer = new LinkedList<Customer>();
         try {
-            ResultSet rs = statement.executeQuery( "SELECT * FROM customer" );
+            ResultSet rs = statement.executeQuery( "SELECT * FROM customer;" );
             int ID;
             String customerName,companyAddress,deliveryAddress;
             while(rs.next()) {
@@ -112,7 +122,7 @@ public class Database  {
    public List<Product> selectProduct() {
         List<Product> product = new LinkedList<Product>();
         try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM product");
+            ResultSet rs = statement.executeQuery("SELECT * FROM product;");
             int ID;
             String productName;    
             float price;  
@@ -131,7 +141,7 @@ public class Database  {
    
    public Customer getCustomerById(int ID) throws SQLException{  
            
-       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customer WHERE id_customer = ?" );
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customer WHERE id_customer = ?;" );
        preparedStatement.setInt(1,ID);
        preparedStatement.executeQuery();
        ResultSet rs = preparedStatement.executeQuery();
@@ -149,7 +159,7 @@ public class Database  {
    
  public Product getProductById(int ID) throws SQLException{  
            
-       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE id_product = ?" );
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE id_product = ?;" );
        preparedStatement.setInt(1,ID);
        preparedStatement.executeQuery();
        ResultSet rs = preparedStatement.executeQuery();
@@ -172,10 +182,5 @@ public class Database  {
             System.err.println("Connection ERROR");
             e.printStackTrace();
         }}
-        
-        
 
-   }   
-
-
- 
+   }

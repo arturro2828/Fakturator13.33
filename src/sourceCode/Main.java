@@ -33,14 +33,7 @@ public class Main {
      Date date = new Date();
      date.Date();
      
-     database.insertCustomer("Krauze", "Warszawa", "Warszawa");
-     database.insertCustomer("Sołowow","Kielce", "Kopenhaga");
-     database.insertCustomer("Solorz-Żak","Warszawa", "Hawaii");
-     database.insertCustomer("Czarnecki","Londyn", "Pruszków");
-     database.insertProduct("Dąb", 65);
-     database.insertProduct("Brzoza", 55);
-     database.insertProduct("Jesion", 63);
-     database.insertProduct("Czereśnia", 70);
+
      
      
      List<Customer> customers = database.selectCustomer();
