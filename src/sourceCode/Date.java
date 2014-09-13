@@ -23,11 +23,11 @@ public class Date{
   
   
   frame.TermsOfPaymentText.removeAllItems();
-  frame.TermsOfPaymentText.addItem(new SelectItem(0,"Choose number of days"));
-  frame.TermsOfPaymentText.addItem(new SelectItem(1,"1 day"));
-  frame.TermsOfPaymentText.addItem(new SelectItem(5,"5 days"));
-  frame.TermsOfPaymentText.addItem(new SelectItem(10,"10 days"));
-  frame.TermsOfPaymentText.addItem(new SelectItem(30,"30 days"));
+  frame.TermsOfPaymentText.addItem(new SelectItem(0,"Ilosc dni"));
+  frame.TermsOfPaymentText.addItem(new SelectItem(1,"1 dzien"));
+  frame.TermsOfPaymentText.addItem(new SelectItem(5,"5 dni"));
+  frame.TermsOfPaymentText.addItem(new SelectItem(10,"10 dni"));
+  frame.TermsOfPaymentText.addItem(new SelectItem(30,"30 dni"));
   
           
    for (ActionListener listener : frame.TermsOfPaymentText.getActionListeners()) {
@@ -58,6 +58,3 @@ public class Date{
     }
     
 }
- 
-    
-

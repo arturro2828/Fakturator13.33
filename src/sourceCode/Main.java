@@ -15,16 +15,17 @@ public class Main {
 
     static private  FakFrame window = null;
     static public FakFrame getWindow() {
-    if (Main.window == null) {
-      Main.window = new FakFrame();
-     }
+        if (Main.window == null) {
+            Main.window = new FakFrame();
+        }
 
-     return Main.window;
+        return Main.window;
     }
-
+    
     public static void main(String[] args)  {
 
      FakFrame frame = Main.getWindow();
+     
      Invoicing invoicing = new Invoicing();
      Database database = Database.getDatabase();
      database.connect();
@@ -70,7 +71,6 @@ public class Main {
            Customer customer = database.getCustomerById(customerID);
            frame.issueToText.setValue(customer.getCustomerName()+" - "+ customer.getCompanyAddress());
            frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());
-           frame.supplierText.setValue("A&P International");
        } catch (SQLException ex) {
 
        }
@@ -100,18 +100,25 @@ public class Main {
 
      try {
            Product product = database.getProductById(productID);
-
+           int n = 1;
+           
            // jakas petla
            frame.listaProduktow.getModel().getValueAt(0, 0);
-
+           
+           
+           frame.listaProduktow.setValueAt(n, 0, 0);
            frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
            frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
+           frame.listaProduktow.setValueAt("PLN", 0, 4);
+           
        } catch (SQLException ex) {
 
        }
 
     }
   });
+
+  
 
 
 
