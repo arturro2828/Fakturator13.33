@@ -105,20 +105,7 @@ public class Main {
 
      try {
            Product product = database.getProductById(productID);
-
-           int n = 1;
            
-           // jakas petla
-           frame.listaProduktow.getModel().getValueAt(0, 0);
-           
-           
-           frame.listaProduktow.setValueAt(n, 0, 0);
-           frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
-           frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
-           frame.listaProduktow.setValueAt("23", 0, 4);
-           
-
-
            Integer columCount;
            Integer rowCount;
 
