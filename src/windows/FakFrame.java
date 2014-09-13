@@ -29,7 +29,7 @@ public class FakFrame extends javax.swing.JFrame {
  }
 
  public void setInvoice(String invoiceNo) {
-  this.invoiceNoText.setText(invoiceNo);
+  this.invoiceNumber.setText(invoiceNo);
  }
 
  /**
@@ -71,8 +71,8 @@ public class FakFrame extends javax.swing.JFrame {
   jLabel2 = new javax.swing.JLabel();
   jLabel17 = new javax.swing.JLabel();
   zapis = new javax.swing.JButton();
-  invoiceNoText = new javax.swing.JLabel();
   jButton1 = new javax.swing.JButton();
+  invoiceNumber = new javax.swing.JTextField();
 
   jTextArea2.setColumns(20);
   jTextArea2.setRows(5);
@@ -204,15 +204,14 @@ public class FakFrame extends javax.swing.JFrame {
    }
   });
 
-  invoiceNoText.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-  invoiceNoText.setText("0");
-
   jButton1.setText("Usuń pozycje");
   jButton1.addActionListener(new java.awt.event.ActionListener() {
    public void actionPerformed(java.awt.event.ActionEvent evt) {
     jButton1ActionPerformed(evt);
    }
   });
+
+  invoiceNumber.setText("jTextField1");
 
   javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
   getContentPane().setLayout(layout);
@@ -240,7 +239,33 @@ public class FakFrame extends javax.swing.JFrame {
        .addComponent(DueDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
        .addComponent(TermsOfPaymentText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
      .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+       .addComponent(jLabel11)
+       .addComponent(grossText, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+      .addGap(28, 28, 28)
+      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+       .addComponent(jLabel12)
+       .addComponent(taxTest, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+      .addGap(27, 27, 27)
+      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+       .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+       .addComponent(jLabel13))
+      .addGap(0, 0, Short.MAX_VALUE))
+     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+       .addGroup(layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+         .addComponent(jLabel1)
+         .addGroup(layout.createSequentialGroup()
+          .addComponent(jLabel7)
+          .addGap(22, 22, 22)
+          .addComponent(CustomerNoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGap(18, 18, 18)
+          .addComponent(choosingProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addComponent(jButton1)
+         .addComponent(invoiceNumber)))
        .addGroup(layout.createSequentialGroup()
         .addComponent(jLabel6)
         .addGap(477, 477, 477))
@@ -253,35 +278,7 @@ public class FakFrame extends javax.swing.JFrame {
       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
       .addComponent(invoiceDate)
       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .addComponent(invoiceDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-       .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel11)
-         .addComponent(grossText, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(28, 28, 28)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(jLabel12)
-         .addComponent(taxTest, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(27, 27, 27)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-         .addComponent(jLabel13)))
-       .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-         .addComponent(jLabel1)
-         .addGroup(layout.createSequentialGroup()
-          .addComponent(jLabel7)
-          .addGap(22, 22, 22)
-          .addComponent(CustomerNoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGap(18, 18, 18)
-          .addComponent(choosingProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(18, 18, 18)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addComponent(invoiceNoText, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-         .addComponent(jButton1))))
-      .addGap(0, 0, Short.MAX_VALUE)))
+      .addComponent(invoiceDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
     .addContainerGap())
    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -298,9 +295,9 @@ public class FakFrame extends javax.swing.JFrame {
        .addComponent(invoiceDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
        .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
       .addGap(29, 29, 29)
-      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-       .addComponent(invoiceNoText)
-       .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+       .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+       .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
      .addGroup(layout.createSequentialGroup()
       .addComponent(jLabel6)
       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,6 +420,9 @@ public class FakFrame extends javax.swing.JFrame {
       }
      }
 
+     Double netto = 0.0;
+     Double brutto = 0.0;
+
      Product product = null;
      LinkedList<Integer> productsListID = new LinkedList<>();
      for (String element : productsList) {
@@ -432,13 +432,20 @@ public class FakFrame extends javax.swing.JFrame {
        Logger.getLogger(FakFrame.class.getName()).log(Level.SEVERE, null, ex);
       }
       productsListID.add(product.getID());
+
+      netto += product.getPrice();
+      brutto += product.getPrice() + (product.getPrice() * 0.23);
      }
 
      for (Integer element : productsListID) {
       System.out.println(element);
      }
 
-     //database.insertInvoicing(null, idCustomer, idProduct, price, amount);
+     String invoiceNumberLocal = this.invoiceNumber.getText().toString();
+     String dateSell = this.invoiceDateText.getValue().toString();
+     String datePaymet = this.DueDateText.getValue().toString();
+
+     database.insertInvoicing(invoiceNumberLocal, customerId, productsListID, dateSell, datePaymet, netto, brutto, 23.0);
 
     }//GEN-LAST:event_zapisActionPerformed
 
@@ -458,7 +465,7 @@ public class FakFrame extends javax.swing.JFrame {
  public javax.swing.JFormattedTextField grossText;
  private javax.swing.JLabel invoiceDate;
  public javax.swing.JFormattedTextField invoiceDateText;
- private javax.swing.JLabel invoiceNoText;
+ private javax.swing.JTextField invoiceNumber;
  public javax.swing.JFormattedTextField issueToText;
  private javax.swing.JButton jButton1;
  private javax.swing.JLabel jLabel1;
