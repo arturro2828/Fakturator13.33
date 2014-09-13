@@ -3,8 +3,8 @@ package model;
 public class InvoiceProduct {
 
  private Integer id;
- private String invoiceId;
- private String productid;
+ private Integer invoiceId;
+ private Integer productId;
 
  public Integer getId() {
   return id;
@@ -14,20 +14,20 @@ public class InvoiceProduct {
   this.id = id;
  }
 
- public String getInvoiceId() {
+ public Integer getInvoiceId() {
   return invoiceId;
  }
 
- public void setInvoiceId(String invoiceId) {
+ public void setInvoiceId(Integer invoiceId) {
   this.invoiceId = invoiceId;
  }
 
- public String getProductid() {
-  return productid;
+ public Integer getProductId() {
+  return productId;
  }
 
- public void setProductid(String productid) {
-  this.productid = productid;
+ public void setProductId(Integer productid) {
+  this.productId = productid;
  }
 
 

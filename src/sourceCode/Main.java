@@ -42,7 +42,7 @@ public class Main {
 
      List<Customer> customers = database.selectCustomer();
      List<Product> products = database.selectProduct();
-     List<Product> invoices = database.selectProduct();
+     List<Invoicing> invoices = database.selectInvoice();
 
 
      ///pomocnnicze wyswietlanie
@@ -55,8 +55,8 @@ public class Main {
      System.out.println(p);
 
      System.out.println("Invoice List: ");
-     //for(Invoicing p: invoices)
-     //System.out.println(p);
+     for(Invoicing p: invoices)
+     System.out.println(p);
 
 
          frame.CustomerNoText.removeAllItems();

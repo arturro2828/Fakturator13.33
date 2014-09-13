@@ -94,9 +94,9 @@ public class Database {
    preparedStatement.setString(2, dateSell);
    preparedStatement.setString(3, datePayment);
    preparedStatement.setInt(4, idCustomer);
-   preparedStatement.setDouble(4, netto);
-   preparedStatement.setDouble(5, brutto);
-   preparedStatement.setDouble(6, taxRate);
+   preparedStatement.setDouble(5, netto);
+   preparedStatement.setDouble(6, brutto);
+   preparedStatement.setDouble(7, taxRate);
    preparedStatement.execute();
 
    Invoicing invoice = null;
@@ -128,19 +128,14 @@ public class Database {
    invoice.setInvoiceNo(rs.getString("invoiceNo"));
    invoice.setDateSell(rs.getString("date_sell"));
    invoice.setDatePayment(rs.getString("date_payment"));
-   invoice.setNetto(rs.getFloat("netto"));
-   invoice.setBrutto(rs.getFloat("brutto"));
-   invoice.setTaxRate(rs.getFloat("tax_rate"));
+   invoice.setNetto(rs.getDouble("netto"));
+   invoice.setBrutto(rs.getDouble("brutto"));
+   invoice.setTaxRate(rs.getDouble("tax_rate"));
    customer = this.getCustomerById(rs.getInt("customerId"));
    invoice.setCustomer(customer);
   }
   return invoice;
  }
-
-
-
-
-
 
  public boolean insertCustomer(String customerName, String companyAddress, String deliveryAddress) {
   try {
@@ -210,24 +205,77 @@ public class Database {
   return product;
  }
 
-  public List<Invoicing> selectInvoice() {
+ public List<Invoicing> selectInvoice() {
   List<Invoicing> invoices = new LinkedList<>();
   try {
-   ResultSet rs = statement.executeQuery("SELECT * FROM product;");
+   ResultSet rs = statement.executeQuery("SELECT * FROM invoicing;");
    int ID;
-   String productName;
-   float price;
+   String invoiceNo;
+   String dateSell;
+   String datePayment;
+   Double netto;
+   Double brutto;
+   Double taxRate;
+   Integer customerId;
+
    while (rs.next()) {
-    ID = rs.getInt("id_product");
-    productName = rs.getString("productName");
-    price = rs.getFloat("price");
-    //invoices.add(new Product(ID, productName, price));
+    ID = rs.getInt("id_invoicing");
+    invoiceNo = rs.getString("invoiceNo");
+    dateSell = rs.getString("date_sell");
+    datePayment = rs.getString("date_payment");
+    netto = rs.getDouble("netto");
+    brutto = rs.getDouble("brutto");
+    taxRate = rs.getDouble("tax_rate");
+    customerId = rs.getInt("customerId");
+
+    Customer customer = this.getCustomerById(customerId);
+    List<InvoiceProduct> products = this.selectInvoiceProductForInvoiceID(ID);
+
+    Invoicing invoicing = new Invoicing();
+    invoicing.setId(ID);
+    invoicing.setInvoiceNo(invoiceNo);
+    invoicing.setDateSell(dateSell);
+    invoicing.setDatePayment(datePayment);
+    invoicing.setNetto(netto);
+    invoicing.setBrutto(brutto);
+    invoicing.setTaxRate(taxRate);
+    invoicing.setCustomer(customer);
+    invoicing.setProducts(products);
+
+    invoices.add(invoicing);
+   }
+  } catch (SQLException e) {
+   return null;
+  }
+  return invoices;
+ }
+
+ public List<InvoiceProduct> selectInvoiceProductForInvoiceID(Integer invoiceId) {
+  List<InvoiceProduct> invoiceProduct = new LinkedList<>();
+  try {
+   PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM invoice_product WHERE invoiceId = ?;");
+   preparedStatement.setInt(1, invoiceId);
+   preparedStatement.executeQuery();
+   ResultSet rs = preparedStatement.executeQuery();
+
+   Integer ID;
+   Integer productId;
+   InvoiceProduct ip;
+
+   while (rs.next()) {
+    ID = rs.getInt("id");
+    productId = rs.getInt("productId");
+    ip = new InvoiceProduct();
+    ip.setId(ID);
+    ip.setProductId(productId);
+    ip.setInvoiceId(invoiceId);
+    invoiceProduct.add(ip);
    }
   } catch (SQLException e) {
    e.printStackTrace();
    return null;
   }
-  return invoices;
+  return invoiceProduct;
  }
 
  public Customer getCustomerById(int ID) throws SQLException {

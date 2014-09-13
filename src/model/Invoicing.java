@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Invoicing {
 
  private Integer id;
@@ -7,9 +9,18 @@ public class Invoicing {
   private String invoiceNo;
  private String dateSell;
  private String datePayment;
- private Float netto;
- private Float brutto;
- private Float taxRate;
+ private Double netto;
+ private Double brutto;
+ private Double taxRate;
+ private List<InvoiceProduct> products;
+
+ public List<InvoiceProduct> getProducts() {
+  return products;
+ }
+
+ public void setProducts(List<InvoiceProduct> products) {
+  this.products = products;
+ }
 
  public Integer getId() {
   return id;
@@ -51,27 +62,27 @@ public class Invoicing {
   this.datePayment = datePayment;
  }
 
- public Float getNetto() {
+ public Double getNetto() {
   return netto;
  }
 
- public void setNetto(Float netto) {
+ public void setNetto(Double netto) {
   this.netto = netto;
  }
 
- public Float getBrutto() {
+ public Double getBrutto() {
   return brutto;
  }
 
- public void setBrutto(Float brutto) {
+ public void setBrutto(Double brutto) {
   this.brutto = brutto;
  }
 
- public Float getTaxRate() {
+ public Double getTaxRate() {
   return taxRate;
  }
 
- public void setTaxRate(Float taxRate) {
+ public void setTaxRate(Double taxRate) {
   this.taxRate = taxRate;
  }
 
