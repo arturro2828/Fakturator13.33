@@ -166,7 +166,7 @@ public class Database  {
 
         Customer customer = new Customer();
          while(rs.next()) {
-            customer.setID(rs.getInt(ID));
+            customer.setID(rs.getInt("id_customer"));
             customer.setCustomerName(rs.getString("customerName"));
             customer.setCompanyAddress(rs.getString("companyAddress"));
             customer.setDeliveryAddress(rs.getString("deliveryAddress"));
@@ -184,7 +184,7 @@ public class Database  {
 
         Product product = new Product();
          while(rs.next()) {
-            product.setID(rs.getInt(ID));
+            product.setID(rs.getInt("id_product"));
             product.setProductName(rs.getString("productName"));
             product.setPrice(rs.getFloat("price"));
 
