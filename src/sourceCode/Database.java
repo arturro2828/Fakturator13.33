@@ -32,11 +32,16 @@ public class Database  {
       connection.setAutoCommit(false);
       System.out.println("Opened database successfully");
       statement = connection.createStatement();
-      //nie dzialaja id_customer INTEGER CONSTRAINT customer_fk REFERENCES customer (id)
-
-      String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName varchar(255), companyAddress varchar(255), deliveryAddress varchar(255));";
-      String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName varchar(255), price FLOAT);";
-      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, id_customer int, id_product int);";
+      
+ //-------------------------------------------------------------------------------------------------------     
+      statement.execute("DROP TABLE IF EXISTS customer;");
+      statement.execute("DROP TABLE IF EXISTS product;");
+      statement.execute("DROP TABLE IF EXISTS invoicing;");
+ //------------------------------------------------------------------------------------------------------- 
+      
+      String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName TEXT, companyAddress TEXT, deliveryAddress TEXT);";
+      String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName TEXT, price FLOAT);";
+      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, invoiceNo TEXT, customerId INTEGER, productId INTEGER, price REAL, amount INTEGER, FOREIGN KEY (customerId) REFERENCES customer(id_customer), FOREIGN KEY (productId) REFERENCES product(id_product));";
 
       statement.execute(createCustomer);
       statement.execute(createProduct);
@@ -94,11 +99,14 @@ public class Database  {
         }
         return true;
     }
-   public boolean insertInvoicing(int idCustomer, int idProduct) {
+   public boolean insertInvoicing(String invoiceNo, int idCustomer, int idProduct, float price, int amount) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoicing VALUES (NULL, ?,?);");
-            preparedStatement.setInt(1, idCustomer);
-            preparedStatement.setInt(2, idProduct);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoicing VALUES (NULL, ?,?,?,?,?);");
+            preparedStatement.setString(1, invoiceNo);
+            preparedStatement.setInt(2, idCustomer);
+            preparedStatement.setInt(3, idProduct);
+            preparedStatement.setFloat(4, price);
+            preparedStatement.setFloat(5, amount);
             preparedStatement.execute();
         } catch (SQLException e) {
             System.err.println("Invoicing ERROR");

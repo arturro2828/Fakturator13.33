@@ -109,7 +109,7 @@ public class Main {
            frame.listaProduktow.setValueAt(n, 0, 0);
            frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
            frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
-           frame.listaProduktow.setValueAt("PLN", 0, 4);
+           frame.listaProduktow.setValueAt("23", 0, 4);
            
        } catch (SQLException ex) {
 

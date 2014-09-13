@@ -53,7 +53,7 @@ public class Date{
    }
   });  
       Invoicing invoicing = new Invoicing(); 
-  frame.invoiceNoText.setValue(year+""+month+""+invoicing.getIdCustomer());
+  frame.setInvoice("F/" + year + "/" + month + "/" + "COS JESZCZE");
   frame.setVisible(true);
     }
     
