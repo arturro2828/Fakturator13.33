@@ -6,6 +6,7 @@ import model.Customer;
 import model.Product;
 import model.Invoicing;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import windows.FakFrame;
 import windows.SelectItem;
 
@@ -21,11 +22,15 @@ public class Main {
 
         return Main.window;
     }
-    
+
     public static void main(String[] args)  {
 
      FakFrame frame = Main.getWindow();
-     
+
+     DefaultTableModel model = (DefaultTableModel) frame.listaProduktow.getModel();
+     model.setRowCount(0);
+     model.setRowCount(4);
+
      Invoicing invoicing = new Invoicing();
      Database database = Database.getDatabase();
      database.connect();
@@ -100,17 +105,55 @@ public class Main {
 
      try {
            Product product = database.getProductById(productID);
-           int n = 1;
-           
-           // jakas petla
-           frame.listaProduktow.getModel().getValueAt(0, 0);
-           
-           
-           frame.listaProduktow.setValueAt(n, 0, 0);
-           frame.listaProduktow.setValueAt(product.getProductName(), 0, 1);
-           frame.listaProduktow.setValueAt(product.getPrice(), 0, 2);
-           frame.listaProduktow.setValueAt("PLN", 0, 4);
-           
+
+           Integer columCount;
+           Integer rowCount;
+
+           Integer row = 0;
+           Integer column = 0;
+
+           Boolean emptyRow = true;
+           Boolean extendTable = false;
+
+           Object value;
+
+           columCount = frame.listaProduktow.getModel().getColumnCount();
+           rowCount = frame.listaProduktow.getModel().getRowCount();
+
+           while (true) {
+            value = frame.listaProduktow.getModel().getValueAt(row, column);
+            if (value != null) {
+             emptyRow = false;
+            }
+
+            if (column < columCount-1) {
+             column++;
+            } else {
+             if (emptyRow) { //koniec wiersza
+              break;
+             }
+             if (row < rowCount-1) { //przejscie do kolejnego wiersza
+              emptyRow = true;
+              column = 0;
+              row++;
+             } else { //cala tabela przeszukana
+              extendTable = true;
+              break;
+             }
+            }
+           }
+
+           if (extendTable) {
+            DefaultTableModel model = (DefaultTableModel) frame.listaProduktow.getModel();
+            model.setRowCount(row+2);
+            row++;
+           }
+
+           frame.listaProduktow.setValueAt(row+1, row, 0);
+           frame.listaProduktow.setValueAt(product.getProductName(), row, 1);
+           frame.listaProduktow.setValueAt(product.getPrice(), row, 2);
+           frame.listaProduktow.setValueAt("PLN", row, 4);
+
        } catch (SQLException ex) {
 
        }
@@ -118,7 +161,7 @@ public class Main {
     }
   });
 
-  
+
 
 
 
