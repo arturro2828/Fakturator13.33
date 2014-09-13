@@ -105,7 +105,7 @@ public class Main {
 
      try {
            Product product = database.getProductById(productID);
-           
+
            Integer columCount;
            Integer rowCount;
 
@@ -152,7 +152,9 @@ public class Main {
            frame.listaProduktow.setValueAt(row+1, row, 0);
            frame.listaProduktow.setValueAt(product.getProductName(), row, 1);
            frame.listaProduktow.setValueAt(product.getPrice(), row, 2);
-           frame.listaProduktow.setValueAt("PLN", row, 4);
+           frame.listaProduktow.setValueAt(1, row, 3);
+           frame.listaProduktow.setValueAt(23.0, row, 4);
+           frame.listaProduktow.setValueAt(product.getPrice(), row, 5);
 
 
        } catch (SQLException ex) {
