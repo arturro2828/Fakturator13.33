@@ -74,8 +74,8 @@ public class Main {
 
        try {
            Customer customer = database.getCustomerById(customerID);
-           frame.issueToText.setValue(customer.getCustomerName()+" - "+ customer.getCompanyAddress());
-           frame.shipToText.setValue(customer.getCustomerName()+" - "+ customer.getDeliveryAddress());
+           frame.issueToText.setValue(customer.getCompanyAddress());
+           frame.shipToText.setValue(customer.getDeliveryAddress());
        } catch (SQLException ex) {
 
        }

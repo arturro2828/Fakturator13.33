@@ -32,19 +32,33 @@ public class Database  {
       connection.setAutoCommit(false);
       System.out.println("Opened database successfully");
       statement = connection.createStatement();
-      
- //-------------------------------------------------------------------------------------------------------     
+
+ //-------------------------------------------------------------------------------------------------------
       statement.execute("DROP TABLE IF EXISTS customer;");
       statement.execute("DROP TABLE IF EXISTS product;");
       statement.execute("DROP TABLE IF EXISTS invoicing;");
- //------------------------------------------------------------------------------------------------------- 
-      
+ //-------------------------------------------------------------------------------------------------------
+
       String createCustomer = "CREATE TABLE IF NOT EXISTS customer (id_customer INTEGER PRIMARY KEY AUTOINCREMENT, customerName TEXT, companyAddress TEXT, deliveryAddress TEXT);";
       String createProduct = "CREATE TABLE IF NOT EXISTS product (id_product INTEGER PRIMARY KEY AUTOINCREMENT,productName TEXT, price FLOAT);";
-      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing (id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, invoiceNo TEXT, customerId INTEGER, productId INTEGER, price REAL, amount INTEGER, FOREIGN KEY (customerId) REFERENCES customer(id_customer), FOREIGN KEY (productId) REFERENCES product(id_product));";
+      String createInvoicing = "CREATE TABLE IF NOT EXISTS invoicing ("
+              + "id_invoicing INTEGER PRIMARY KEY AUTOINCREMENT, "
+              + "invoiceNo TEXT, "
+              + "date_sell TEXT, "
+              + "date_payment TEXT, "
+              + "customerId INTEGER, "
+              + "netto REAL, "
+              + "brutto REAL, "
+              + "tax_rate REAL, "
+              + "FOREIGN KEY (customerId) REFERENCES customer(id_customer));";
+
+      String createPivot = "CREATE TABLE IF NOT EXISTS invoice_product (id INTEGER PRIMARY KEY AUTOINCREMENT, productId INTEGER, invoiceId INTEGER,"
+              + "FOREIGN KEY (productId) REFERENCES product(id_product)"
+              + "FOREIGN KEY (invoiceId) REFERENCES invoicing(id_invoicing));";
 
       statement.execute(createCustomer);
       statement.execute(createProduct);
+      statement.execute(createInvoicing);
       statement.execute(createInvoicing);
 
       List<Customer> customers = this.selectCustomer();
@@ -73,6 +87,22 @@ public class Database  {
 
   }
 
+    public boolean insertInvoicing(String invoiceNo, int idCustomer, int idProduct, float price, int amount) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoicing VALUES (NULL, ?,?,?,?,?);");
+            preparedStatement.setString(1, invoiceNo);
+            preparedStatement.setInt(2, idCustomer);
+            preparedStatement.setInt(3, idProduct);
+            preparedStatement.setFloat(4, price);
+            preparedStatement.setFloat(5, amount);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.err.println("Invoicing ERROR");
+            return false;
+        }
+        return true;
+    }
+
    public boolean insertCustomer(String customerName, String companyAddress, String deliveryAddress) {
         try {
     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO customer VALUES (NULL, ?,?,?);");
@@ -98,23 +128,7 @@ public class Database  {
             return false;
         }
         return true;
-    }
-   public boolean insertInvoicing(String invoiceNo, int idCustomer, int idProduct, float price, int amount) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO invoicing VALUES (NULL, ?,?,?,?,?);");
-            preparedStatement.setString(1, invoiceNo);
-            preparedStatement.setInt(2, idCustomer);
-            preparedStatement.setInt(3, idProduct);
-            preparedStatement.setFloat(4, price);
-            preparedStatement.setFloat(5, amount);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            System.err.println("Invoicing ERROR");
-            return false;
-        }
-        return true;
-    }
-
+   }
 
    public List<Customer> selectCustomer() {
         List<Customer> customer = new LinkedList<Customer>();
@@ -179,6 +193,24 @@ public class Database  {
 
        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE id_product = ?;" );
        preparedStatement.setInt(1,ID);
+       preparedStatement.executeQuery();
+       ResultSet rs = preparedStatement.executeQuery();
+
+        Product product = new Product();
+         while(rs.next()) {
+            product.setID(rs.getInt("id_product"));
+            product.setProductName(rs.getString("productName"));
+            product.setPrice(rs.getFloat("price"));
+
+
+         }
+        return product;
+   }
+
+ public Product getProductByName(String name) throws SQLException{
+
+       PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE productName = ?;" );
+       preparedStatement.setString(1,name);
        preparedStatement.executeQuery();
        ResultSet rs = preparedStatement.executeQuery();
 
