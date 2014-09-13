@@ -42,6 +42,7 @@ public class Main {
 
      List<Customer> customers = database.selectCustomer();
      List<Product> products = database.selectProduct();
+     List<Product> invoices = database.selectProduct();
 
 
      ///pomocnnicze wyswietlanie
@@ -51,6 +52,10 @@ public class Main {
 
      System.out.println("Products List: ");
      for(Product p: products)
+     System.out.println(p);
+
+     System.out.println("Invoice List: ");
+     for(Invoicing p: invoices)
      System.out.println(p);
 
 

@@ -2,6 +2,8 @@ package windows;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,6 +75,7 @@ public class FakFrame extends javax.swing.JFrame {
   zapis = new javax.swing.JButton();
   jButton1 = new javax.swing.JButton();
   invoiceNumber = new javax.swing.JTextField();
+  selectInvoice = new javax.swing.JComboBox();
 
   jTextArea2.setColumns(20);
   jTextArea2.setRows(5);
@@ -213,6 +216,8 @@ public class FakFrame extends javax.swing.JFrame {
 
   invoiceNumber.setText("jTextField1");
 
+  selectInvoice.setToolTipText("");
+
   javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
   getContentPane().setLayout(layout);
   layout.setHorizontalGroup(
@@ -278,7 +283,9 @@ public class FakFrame extends javax.swing.JFrame {
       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
       .addComponent(invoiceDate)
       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .addComponent(invoiceDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+       .addComponent(selectInvoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+       .addComponent(invoiceDateText, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))))
     .addContainerGap())
    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -294,7 +301,9 @@ public class FakFrame extends javax.swing.JFrame {
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
        .addComponent(invoiceDateText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
        .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-      .addGap(29, 29, 29)
+      .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+      .addComponent(selectInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addGap(3, 3, 3)
       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
        .addComponent(invoiceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -447,6 +456,26 @@ public class FakFrame extends javax.swing.JFrame {
 
      database.insertInvoicing(invoiceNumberLocal, customerId, productsListID, dateSell, datePaymet, netto, brutto, 23.0);
 
+     GregorianCalendar calendar = new GregorianCalendar();
+     int month = calendar.get(Calendar.MONTH)+1;
+     int day = calendar.get(Calendar.DAY_OF_MONTH);
+     int year = calendar.get(Calendar.YEAR);
+     this.invoiceDateText.setValue(day+"-"+month+"-"+year );
+     this.setInvoice("F/" + year + "/" + month + "/");
+     this.issueToText.setText("");
+     this.shipToText.setText("");
+     this.DueDateText.setText("");
+     this.grossText.setText("");
+     this.taxTest.setText("");
+     this.totalText.setText("");
+
+     DefaultTableModel model = (DefaultTableModel) this.listaProduktow.getModel();
+     model.setRowCount(0);
+     model.setRowCount(4);
+
+     this.CustomerNoText.setSelectedIndex(0);
+     this.choosingProduct.setSelectedIndex(0);
+     this.TermsOfPaymentText.setSelectedIndex(0);
     }//GEN-LAST:event_zapisActionPerformed
 
  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -485,6 +514,7 @@ public class FakFrame extends javax.swing.JFrame {
  private javax.swing.JScrollPane jScrollPane8;
  private javax.swing.JTextArea jTextArea2;
  public javax.swing.JTable listaProduktow;
+ private javax.swing.JComboBox selectInvoice;
  public javax.swing.JFormattedTextField shipToText;
  public javax.swing.JFormattedTextField taxTest;
  public javax.swing.JFormattedTextField totalText;

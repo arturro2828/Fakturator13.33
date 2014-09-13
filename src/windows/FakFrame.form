@@ -124,7 +124,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="invoiceDate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="invoiceDateText" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="selectInvoice" max="32767" attributes="0"/>
+                          <Component id="invoiceDateText" pref="159" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -146,7 +149,9 @@
                           <Component id="invoiceDateText" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="invoiceDate" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="selectInvoice" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="invoiceNumber" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -469,6 +474,14 @@
     <Component class="javax.swing.JTextField" name="invoiceNumber">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="selectInvoice">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
   </SubComponents>

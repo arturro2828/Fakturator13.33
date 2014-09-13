@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Customer;
+import model.InvoiceProduct;
 import model.Product;
 import model.Invoicing;
 import windows.FakFrame;
@@ -207,6 +208,26 @@ public class Database {
    return null;
   }
   return product;
+ }
+
+  public List<Invoicing> selectInvoice() {
+  List<Invoicing> invoices = new LinkedList<>();
+  try {
+   ResultSet rs = statement.executeQuery("SELECT * FROM product;");
+   int ID;
+   String productName;
+   float price;
+   while (rs.next()) {
+    ID = rs.getInt("id_product");
+    productName = rs.getString("productName");
+    price = rs.getFloat("price");
+    //invoices.add(new Product(ID, productName, price));
+   }
+  } catch (SQLException e) {
+   e.printStackTrace();
+   return null;
+  }
+  return invoices;
  }
 
  public Customer getCustomerById(int ID) throws SQLException {
