@@ -55,8 +55,8 @@ public class Main {
      System.out.println(p);
 
      System.out.println("Invoice List: ");
-     for(Invoicing p: invoices)
-     System.out.println(p);
+     //for(Invoicing p: invoices)
+     //System.out.println(p);
 
 
          frame.CustomerNoText.removeAllItems();
